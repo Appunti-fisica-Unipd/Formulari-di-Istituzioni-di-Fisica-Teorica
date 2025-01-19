@@ -6,8 +6,11 @@
 \usepackage{float}
 \usepackage{blindtext}
 \usepackage{physics}
+\usepackage{breqn}
 \usepackage{enumitem}
-\setlist[itemize]{topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0.5ex}
+\setlist[itemize]{topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt}
+\usepackage{setspace}
+\setstretch{0.9125}
 
 % Language
 \usepackage[italian]{babel}
@@ -33,8 +36,8 @@
 \titlespacing*{\subsection}
 {0pt}{1ex}{0.4ex}
 
-\setlength{\abovedisplayskip}{2pt}
-\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
 \setlength{\abovedisplayshortskip}{1pt}
 \setlength{\belowdisplayshortskip}{1pt}
 
@@ -211,7 +214,7 @@ mathescape=true,
         \e{\|A\| = \sup_{\psi \in \mathcal{H} \setminus \{0\}} \frac{\|A\psi\|}{\|\psi\|} = \sup_{\|\psi\|=1} \|A\psi\|} \ex
     \it \g{Operatore che è funzione di un altro operatore}
         \e{f(A)\psi = f(a)\psi}\ex
-        Vale se A è autoaggiunto
+        Vale se A è autoaggiunto e $\psi$ autofunzione
     \item [$\blacktriangle$] \g{Probabilità e statistica}
     \it \g{Probabilità di una misura}
     La probabilità che una misura dell'osservabile A nello stato $\left|\psi\right>$ sia $\text{a} \in \ \sigma_{d}(A) \  \text{è}  $ :
@@ -256,6 +259,7 @@ Vale anche per qualsiasi altra rappresentazione di $\psi$ integrando nel corrisp
         \e{(\Delta A)_\psi (\Delta B)_\psi \geq \frac{1}{2}\left|{\langle [A, B] \rangle_\psi} \right|} \ex
         \it \g{Per la posizione e il momento}
         \e{(\Delta X)_{\psi}(\Delta P)_{\psi} \geq \frac{\hbar}{2}}\ex
+
 \item [$\blacktriangle$] \g{Proiettori}
 \e{\mathcal{P}^{+} = \mathcal{P} \qquad \mathcal{P}^{2} = \mathcal{P}}\ex
 Gli autovalori di un proiettore sono 0 e 1 
@@ -376,7 +380,8 @@ Con U operatore unitario o antiunitario
         \e{U(\varphi) = \exp\left(-i\frac{\varphi}{\hbar} P\right)} \ex
         dove $\varphi$ è il parametro di traslazione e P è il generatore infinitesimo di traslazione
         \it \g{Effetto sull'operatore di posizione e sul momento}
-        \e{X = U(\varphi)XU(\varphi)^{\dagger} = X -\varphi \qquad U(\varphi) P = P} \ex
+        \e{X' = U(\varphi)XU(\varphi)^{\dagger} = X -\varphi \qquad U(\varphi)^{\dagger}XU(\varphi) = X +\varphi}\ex
+        \e{U(\varphi) P = P} \ex
     \it \g{Effetto sulla funzione d'onda}
         \e{U(\varphi)\psi(x) = \psi(x - \varphi)} \ex
     \it \g{Traslazioni in 3D}
@@ -464,10 +469,9 @@ dove $U(t)$ è l'operatore di evoluzione causale.
   
 \item [$\blacktriangle$] \g{Commutazioni generiche e altre formule}
     \it \g{Commutatori di base}
-        \e{[X_i, P_j] = i\hbar\delta_{ij}}\ex
-        Che vale in generale se al posto di X c'è l'operatore di posizione generalizzata Q
+        \e{[X_i, P_j] = i\hbar\delta_{ij} \qquad [Q,f(P)] = i \hbar f'(P)}\ex
+        dove Q è l'operatore di posizione generalizzata
         \e{[X, P^2] = 2i\hbar P \qquad [X^2, P^2] = 4i\hbar XP + 2\hbar^2} \ex
-        \e{[Q,f(P)] = i \hbar f'(P)}\ex
     \it \g{Commutatori con l'operatore di traslazione}
     \e{[Q, U(\varphi)] = \varphi \ U(\varphi)}\ex
     \it \g{Formula di Baker-Campbell-Hausdorff}
@@ -667,6 +671,15 @@ Tra due vettori fattorizzati si ha
 \e{(\bra{\psi_{1}}\otimes \bra{\psi_{2}})(\ket{\chi_{1}}\otimes\ket{\chi_{2}}) = \braket{\psi_{1}}{\chi_{1}}_{\mathcal{H}_{1}}\braket{\psi_{2}}{\chi_{2}}_{\mathcal{H}_{2}}}\ex
      \item [$\blacktriangle$]\g{Norma}
 \e{\norm{\psi}^{2} = \sum_{n,m}|c_{n,m}|^{2}}\ex
+\item [$\blacktriangle$] \g{Operatori e prodotto tensore}
+\e{(A_{1} \otimes B_{2})\left(\sum_{n,m}C_{n,m}\ket{e_{1,n}} \otimes \ket{e_{2,m}}\right) = }\ex
+\e{ = \sum_{n,m}C_{n,m}\left(A_{1}\ket{e_{1,n}}\right) \otimes \left(B_{2}\ket{e_{2,m}}\right)}\ex
+\e{(A_{1} \otimes \mathbb{I}_{\mathcal{H}_{2}})(\mathbb{I}_{\mathcal{H}_{1}} \otimes B_{2}) = A_{1} \otimes B_{2} = (\mathbb{I}_{\mathcal{H}_{1}} \otimes B_{2})(A_{1} \otimes \mathbb{I}_{\mathcal{H}_{2}})}\ex
+\e{A_{1}\ \text{a.a e }\{\ket{a_{1,r}}\}_{\substack{a_{1} \ \in \sigma(A_{1})\\ r = 1, \dots, d(a1)}} \text{base o.n. di } \mathcal{H}_{1} \label{base A1}}\ex
+\e{B_{2} \ \text{a.a e }\{\ket{b_{2,s}}\}_{\substack{b2 \ \in \sigma(B2)\\ s = 1, \dots, d(b2)} } \text{base o.n. di } \mathcal{H}_{2} \label{base B2}}\ex
+\e{(\ref{base A1}) \ \text{e} \ (\ref{base B2}) \implies \{\ket{a_{1,r}} \otimes \ket{b_{2,s}}\}_{\substack{a1 \ \in \sigma(A1), r = 1, \dots,d(a1) \\ b2 \ \in \ \sigma(B2), s = 1, \dots,d(b2)}}} \ex
+è base o.n. di $\mathcal{H} = \mathcal{H}_{1} \otimes \mathcal{H}_{2}$. Dati due autovalori $a_{1}$ e $b_{2}$ fissati, la degenerazione della coppia su $\mathcal{H}$ sarà
+\e{d(a_{1},b_{2}) = d(a_{1})d(b_{2})}\ex
 \item [$\blacksquare$] \g{Spin}
     \it \g{Relazioni di commutazione}
         \e{[S_i, S_j] = i\hbar \epsilon_{ijk} S_k \qquad [S_{i},X_{j}] = [S_{i}, P_{j}] = [S_{i}, L_{j}] = 0} \ex
@@ -734,7 +747,7 @@ in forma matriciale gli autostati lungo una generica direzione $\hat{n}$ sono:
         dove $\braket{m1,m2}{j,m}$ vengono detti coefficienti di Clebsch Gordan. Si noti inoltre, che siccome essi possono essere scelti reali, si ha anche 
         \e{\ket{j1,j2,m1,m2} \equiv \ket{m1,m2} = \sum_{j,m} \ket{j,m}\braket{m1,m2}{j,m}}\ex 
          \e{j \ \in \{j_{1} + j_{2}, j_{1} + j_{2} - 1, \dots, |j_{1}-j_{2}|\}}\ex
-        \e{J_{z}\ket{j,m} = \hbar \ket{j,m} \qquad J_{z}\ket{m1,m2} = (m1 + m2)\hbar \ket{m1,m2}}\ex
+        \e{J_{z}\ket{j,m} = \hbar m\ket{j,m} \qquad J_{z}\ket{m1,m2} = (m1 + m2)\hbar \ket{m1,m2}}\ex
     \it \g{Relazioni di commutazione}
         \e{[J^2, J^{(1)}] = 0 \qquad [J^2, J^{(2)}] = 0 \qquad [J^2, J^{(1,2)}_i] \neq 0} \ex
         \it \g{Coefficienti di Clebsch-Gordan} Ogni coefficiente, ad esempio $-3/2$, va letto come se ci fosse una radice. In questo caso quindi $-\sqrt{3/2}$
@@ -857,7 +870,7 @@ Gli autovalori hanno energia pari a
         \e{\int x e^{-x^2} \, dx = -\frac{1}{2} e^{-x^2} \qquad \int_0^\infty x^2 e^{-x^2} \, dx = \frac{1}{4} \sqrt{\pi}} \ex
        \e{ \int_{-\infty}^{+\infty} e^{-\alpha x^2} , dx = \sqrt{\frac{\pi}{\alpha}} \qquad \int_{-\infty}^{+\infty} x^2 e^{-\alpha x^2} dx = \sqrt{\frac{\pi}{2\alpha^3}} }\ex
 
-\e{\int_{-\infty}^{+\infty} e^{-\alpha x^2 + \beta x}  dx = \sqrt{\frac{\pi}{\alpha}} , e^{\frac{\beta^2}{4\alpha}}} \ex
+\e{\int_{-\infty}^{+\infty} e^{-\alpha x^2 + \beta x}  dx = \sqrt{\frac{\pi}{\alpha}}  e^{\frac{\beta^2}{4\alpha}}} \ex
 
         \item [$\blacktriangle$] \g{Numeri complessi}
         \e{z = a + ib = r(\cos(\theta) + i\sin(\theta)) = re^{i\theta} \quad \overline{z} = z^{*} = a - ib}\ex
