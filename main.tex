@@ -10,7 +10,7 @@
 \usepackage{enumitem}
 \setlist[itemize]{topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt}
 \usepackage{setspace}
-\setstretch{0.9125}
+\setstretch{0.6515}
 
 % Language
 \usepackage[italian]{babel}
@@ -209,7 +209,8 @@ mathescape=true,
     \it \g{Normalizzazione }
         \e{1 = \langle \psi | \psi \rangle = \int_{\Delta} \overline{\psi(x)}\psi(x) \, dx = \int_{\Delta} |\psi(x)|^2 \, dx = ||\psi||^{2}}     \ex
     \it \g{Autoaggiuntezza di un operatore}
-        \e{\langle A\psi | \varphi \rangle = \langle \psi | A^\dagger \varphi \rangle = \langle \psi | A \varphi \rangle} \ex
+        \e{\langle A\psi | \varphi \rangle = \langle \psi | A^\dagger \varphi \rangle = \langle \psi | A \varphi \rangle \quad A^{\dagger} = (A^{*})^{T} \quad (AB)^{\dagger} = B^{\dagger}A^{\dagger}} \ex
+        
     \it \g{Norma di un operatore}
         \e{\|A\| = \sup_{\psi \in \mathcal{H} \setminus \{0\}} \frac{\|A\psi\|}{\|\psi\|} = \sup_{\|\psi\|=1} \|A\psi\|} \ex
     \it \g{Operatore che è funzione di un altro operatore}
@@ -257,8 +258,10 @@ Vale anche per qualsiasi altra rappresentazione di $\psi$ integrando nel corrisp
 \item [$\blacktriangle$] \g{Indeterminazione di Heisenberg}
     \it \g{Espressione generale}
         \e{(\Delta A)_\psi (\Delta B)_\psi \geq \frac{1}{2}\left|{\langle [A, B] \rangle_\psi} \right|} \ex
+        Valida se $\psi, A\psi, B\psi \ \in D_{A} \ \cap \ D_{B}$
         \it \g{Per la posizione e il momento}
         \e{(\Delta X)_{\psi}(\Delta P)_{\psi} \geq \frac{\hbar}{2}}\ex
+        Che è sempre valida se se si lavora con $\mathcal{H} = L_{2}(\mathbb{R})$
 
 \item [$\blacktriangle$] \g{Proiettori}
 \e{\mathcal{P}^{+} = \mathcal{P} \qquad \mathcal{P}^{2} = \mathcal{P}}\ex
@@ -268,7 +271,7 @@ Nel caso di $a \in \sigma_{d}(A)$ allora:
 \e{\mathcal{P}_{a} = \sum_{r=1}^{d(a)}\ket{a,r}\bra{a,r}}\ex
 \e{\sum_{a \ \in \ \sigma_{d}(A)}\mathcal{P}_{a} = \sum_{a \ \in \ \sigma_{d}(A)} \sum_{r = 1}^{d(a)}\ket{a,r}\bra{a,r} = \mathbb{I}}\ex
 
-\e{\langle \mathcal{P}_{a} \rangle_{\psi} = \sum_{r=1}^{d(a)}\frac{|\braket{a,r}{\psi}|^{2}}{\norm{\psi}^{2}} = \frac{\norm{\mathcal{P}_{a}\ket{\psi}}^{2}}{\norm{\psi}^{2}} = \text{P}_{\psi}(a)}\ex
+\e{\langle \mathcal{P}_{a} \rangle_{\psi} = \sum_{r=1}^{d(a)}\frac{|\braket{a,r}{\psi}|^{2}}{\norm{\psi}^{2}} = \frac{\norm{\mathcal{P}_{a}\ket{\psi}}^{2}}{\norm{\psi}^{2}} = \text{P}_{\psi}(a) \label{valor medio proiettore}}\ex
 
 \it \g{Utilizzo dei proiettori nel caso di spettro generico }
 \e{\mathcal{H} = \mathcal{H}_{s} \oplus \mathcal{H}_{s}^{\perp}}\ex
@@ -286,8 +289,14 @@ Siano A e B due operatori limitati e i relativi osservabili con spettro discreto
 \e{ \exists \text{ una base o.n. } \{ \ket{a, b, r} \}_{\substack{a \in \sigma(A)  \\ b \in \sigma(B)  \\ r = 1, \dots, d(a, b)}}}\ex
 Vale dunque $A\ket{a,b,r} = a\ket{a,b,r}$ e $B\ket{a,b,r} = b\ket{a,b,r}$
 \e{[A,B] = 0}\ex
-Inoltre vale:
+Inoltre valgono le seguenti due relazioni:
 \e{[A,B] = 0 \implies [\mathcal{P}_{a}, \mathcal{P}_{b}] = 0 \ \forall a,b \iff [f(A), g(B)] = 0}\ex
+\e{[A,B] = 0 \ \implies \ \forall b \ \in \sigma(B) \ \begin{cases}
+   \  \forall \ket{b} \ \in \mathcal{H}_{b}, A\ket{b} \ \in \mathcal{H}_{b} \\
+   [A, \mathcal{P}_{b}] = 0
+    \label{commutatore A e Pb}
+    
+\end{cases}}\ex
 \it \g{ICOC}
 Si tratta di un insieme completo di osservabili compatibili, si può indicare con $\vec{A}$. 
 \e{\vec{A} \ \text{ICOC} \iff d(\vec{a}) = 1 \ \forall \vec{a} \ \in \ \sigma_{\vec{A}}}\ex
@@ -306,7 +315,9 @@ Inoltre $\psi^{*}$ è soluzione dell'equazione
 dove 
 \e{\rho(\vec{x},t) = |\psi(\vec{x},t)|^{2}}\ex è la densità di probabilità, mentre
 \e{\vec{J}(\vec{x},t) = -\frac{i\hbar}{2m}\left(\psi^{*}\vec{\nabla} \psi  - \psi \vec{\nabla} \psi^{*}\right) }\ex
-è la densità di corrente di probabilità.
+è la densità di corrente di probabilità.\\
+In una dimensione e senza dipendenza temporale essa diventa:
+\e{\frac{d}{dx}\left(\psi'\psi^{*} - (\psi^{*})'\psi\right) = 0}\ex
 \item [$\blacktriangle$] \g{Operatore di evoluzione causale}
 \e{U^{-1}(t,t_{0}) = U^{+}(t,t_{0}) = U(t_{0},t)}\ex
 In un sistema conservativo, in cui cioè l'hamiltoniana resta invariata nel tempo, si ha 
@@ -321,8 +332,8 @@ In un sistema conservativo, in cui cioè l'hamiltoniana resta invariata nel temp
         \it \g{Stati stazionari}
 Un autostato dell'hamiltoniana, $\ket{\psi_{E}}$ viene chiamato stato stazionario ed evolve in questo modo:
 \e{\ket{\psi_{E}(t)} = \text{exp}\left(-\frac{i}{h}E(t-t_{0})\right)\ket{\psi_{E}(t_{0})}}\ex
-il valor medio di un operatore calcolato su uno stato stazionario non varia nel tempo:
-\e{\frac{d}{dt}\langle A \rangle_{\psi_{E}} = 0 \ \forall A} \label{valor medio stato stazionario}\ex
+il valor medio e la varianza di un operatore calcolati su uno stato stazionario non variano nel tempo:
+\e{\frac{d}{dt}\langle A \rangle_{\psi_{E}} = 0, \qquad \frac{d}{dt}(\Delta A)^{2}_{\psi_{E}} = 0 \quad \forall A} \label{valor medio stato stazionario}\ex
 \it \g{Operatori}       
 In visuale di Schroedinger gli operatori rimangono invariati:
 \e{A \rightarrow \ A}\ex
@@ -363,13 +374,14 @@ In visuale di Schroedinger gli operatori rimangono invariati:
         Infine per uno stato misto si ha 
         \e{Tr(\rho^{2}) < 1} \ex
         Per quanto riguarda l'evoluzione casuale si ha:
+        \e{\rho_{s}(t) = \sum_{k}P_{k}\ket{\psi_{k}(t)}\bra{\psi_{k}(t)} = U(t,t_{0})\rho(t_{0})U(t,t_{0})^{\dagger}}\ex
         \e{\langle A \rangle(t) = Tr(U \rho(t_{0})U^{\dagger}A) = Tr(\rho(t_{0})U^{\dagger}AU) = Tr(\rho(t_{0})A_{h})} \ex
         \e{i \hbar \frac{d}{dt}\rho_{s}(t) = [H_{s}(t), \rho_{s}(t)]}\ex
         
      
 \item [$\blacksquare$] \g{Simmetrie}
 \it \g{Teorema di Wigner}
-\e{\tau \text{è una trasformazione di simmetria} \iff \begin{cases}
+\e{\tau \ \text{è una trasformazione di simmetria} \iff \begin{cases}
     \psi^{'} = W \psi\\
     A' = WAW^{\dagger}
 \end{cases}}\ex 
@@ -406,7 +418,8 @@ Con U operatore unitario o antiunitario
     \item[$\blacktriangle$] \g{Simmetrie della dinamica}
 Sono quelle simmetrie tali per cui
 \e{[W,H] = 0 \ \iff \ WHW^{\dagger} = H \ \iff \ [W, U(t-t_{0})] = 0}\ex
-dove $U(t-t_{0})$ in questo caso è l'operatore di evoluzione causale definito 
+dove $U(t-t_{0})$ in questo caso è l'operatore di evoluzione causale. Da questa relazione si ricava banalmente la validità della seguente relazione:
+\e{\langle H \rangle_{\psi({t})} = 0 \quad \forall \ket{\psi(t)}}\ex se H non dipende dal tempo
 \it \g{Gruppo a un parametro di simmetrie della dinamica}
 Definito 
 \e{W(\varphi) = \text{exp}\left(-\frac{i}{\hbar}Q\varphi\right)}\ex con $W(s) \in G_{d}$ (gruppo di simmetrie della dinamica) e Q generatore infinitesimo della simmetria, si ha 
@@ -414,7 +427,7 @@ Definito
     [W(s), H] &= 0 \iff [Q, H] = 0 
     &\iff \frac{d}{dt} \langle Q \rangle_{\psi}(t) = 0 \quad \forall \psi \in \mathcal{H}
 \end{align}
-E ciò se e solo se Q è una costante del moto
+E ciò se e solo se Q è una costante del moto. Si noti inoltre che non si conserva solo il valor medio di Q ma anche tutte le probabilità associate agli autovalori di Q, per via della (\ref{commutatore A e Pb}) e della (\ref{valor medio proiettore}).
 \it \g{Esempio con Hamiltoniana in una dimensione}
 Ad esempio per un oscillatore armonico in direzione x, come nel caso della (\ref{oscillatore armonico}), siccome $P_{y}$ e $P_{z}$ commutano con H, i loro valori medi non varieranno nel tempo. Il valor medio di $P_{x}$ invece non varierà nel tempo, in generale, solo se calcolato su uno stato stazionario di H (si veda la (\ref{valor medio stato stazionario})).
 
@@ -469,7 +482,8 @@ dove $U(t)$ è l'operatore di evoluzione causale.
   
 \item [$\blacktriangle$] \g{Commutazioni generiche e altre formule}
     \it \g{Commutatori di base}
-        \e{[X_i, P_j] = i\hbar\delta_{ij} \qquad [Q,f(P)] = i \hbar f'(P)}\ex
+        \e{[X_i, P_j] = i\hbar\delta_{ij} \qquad [\vec{X}, \vec{P}] = i \hbar\  \mathbb{I} \qquad [Q,f(P)] = i \hbar f'(P)}\ex
+        \e{[A,B] = 0 \ \implies [f(A),B] = 0 \qquad [A,f(A)] = 0}\ex
         dove Q è l'operatore di posizione generalizzata
         \e{[X, P^2] = 2i\hbar P \qquad [X^2, P^2] = 4i\hbar XP + 2\hbar^2} \ex
     \it \g{Commutatori con l'operatore di traslazione}
@@ -557,7 +571,9 @@ Per un quanto di energia si ha
         \e{\int_{\mathbb{R}} \psi_i(ax) \psi_j(ax) = \frac{\delta_{ij}}{a}} \ex
      Le autofunzioni sono a parità definita, ovvero sono pari per indici pari, dispari per indici dispari:
      \e{\psi_{n}(-x) = (-1)^{n}\psi_{n}(x)}\ex
-     \e{\langle X \rangle_{\psi_{n}} = \langle P \rangle_{\psi_{n}} = 0 \qquad \langle X^{2}\rangle_{\psi_{n}} = \frac{\hbar}{m \omega}(n + \frac{1}{2})}\ex
+     \e{\langle X \rangle_{\psi_{n}} = \langle P \rangle_{\psi_{n}} = 0 \qquad \langle 
+     X^{2}\rangle_{\psi_{n}} = \frac{\hbar}{m \omega}(n + \frac{1}{2})}\ex
+     In generale il valor medio di $X$ su domini simmetrici e su stati $\ket{\psi}$ a parità definita è nullo.
      \e{\langle P^{2}\rangle_{\psi_{n}} = \hbar \omega m (n + \frac{1}{2}) \ \implies \langle \frac{P^{2}}{2m}\rangle_{\psi_{n}} = \frac{E_{n}}{2}}\ex
      Ovvero l'energia è equamente divisa, in media, tra parte cineticia e parte potenziale. 
 
@@ -577,15 +593,15 @@ Per un quanto di energia si ha
         \e{[a, a^\dagger] = 1} \ex
 
     \it \g{Espressioni per $X$ e $P$}
-        \e{X = \sqrt{\frac{\hbar}{2m\omega}} (a + a^\dagger) \qquad P = \frac{i}{\sqrt{2\hbar m \omega}} (a^\dagger - a)} \ex
+        \e{X = \sqrt{\frac{\hbar}{2m\omega}} (a + a^\dagger) \qquad P = i{\sqrt{\frac{m \hbar \omega}{2}}} (a^\dagger - a)} \ex
 
     \it \g{Azioni degli operatori}
         \e{a^\dagger |n\rangle = \sqrt{n + 1} |n + 1\rangle \qquad a |n\rangle = \sqrt{n} |n - 1\rangle} \ex
-        \e{(a^\dagger)^2 |n\rangle = \sqrt{(n + 1)(n + 2)} |n + 2\rangle \quad a^2 |n\rangle = \sqrt{n(n - 1)} |n - 2\rangle} \ex
+        \e{(a^\dagger)^2 |n\rangle = \sqrt{(n + 1)(n + 2)} |n + 2\rangle }\ex
+        \e{a^2 |n\rangle = \sqrt{n(n - 1)} |n - 2\rangle} \ex
         \e{a a^\dagger |n\rangle = (n + 1) |n\rangle, \quad a^\dagger a |n\rangle = n |n\rangle} \ex
         \e{P |n\rangle = (-1)^n |n\rangle = (-1)^N |n\rangle} \ex
-        Autofunzioni:
-        \e{\psi_n(x) = \frac{(a^\dagger)^n}{\sqrt{n!}} \psi_0(x)} \ex
+        \e{\psi_n(x) = \frac{(a^\dagger)^n}{\sqrt{n!}} \psi_0(x) \qquad \ket{n} = \frac{(a^{\dagger})^{n}}{\sqrt{n!}}\ket{0}} \ex
 \item [$\blacktriangle$] \g{Operatore numero}
         \e{N = a^\dagger a \qquad N\ket{n} = n\ket{n} \qquad N a \ket{n} = (n-1)a\ket{n}}\ex
     \it \g{Relazioni di commutazione}
@@ -597,6 +613,7 @@ Per un quanto di energia si ha
         \e{\vec{J} = \vec{L} + \vec{S}}\ex
             dove $\vec{L}$ è il momento angolare orbitale, mentre $\vec{S}$ è lo spin
         \e{{J}^{2} = J^{2}_{x} + J^{2}_{y} + J^{2}_{z}}\ex
+        Formule analoghe per $L^{2}$ e $S^{2}$
          \it \g{Autovalori di $J^2$ e $J_z$}
     \e{J^2 |l, m\rangle = \hbar^2 j(j + 1) |j, m\rangle \qquad L_z |j, m\rangle = \hbar m |j, m\rangle} \ex
       con $j \in \frac{1}{2} \mathbb{N}$ e $m \in \{-j, -j + 1, \dots, +j\}$.
@@ -606,23 +623,33 @@ Per un quanto di energia si ha
     \it \g{Autovalori di $L^2$ e $L_z$}
     \e{L^2 |l, m\rangle = \hbar^2 l(l + 1) |l, m\rangle \qquad L_z |l, m\rangle = \hbar m |l, m\rangle} \ex
 
-    \it \g{Espressione di $L^2$}
-    \e{L^2 = -\hbar^2 \left[\frac{1}{\sin^2\theta} \frac{\partial^2}{\partial \varphi^2} + \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \sin\theta \frac{\partial}{\partial \theta}\right]} \ex
-
+    \it \g{Espressioni di $L^2$, $L_{x}$, $L_{y}$ e $L_{z}$}
+    \e{L^2 = -\hbar^2 \left[ \frac{\partial^{2}}{\partial \theta^{2}} + \frac{1}{\tan(\theta)}\frac{\partial}{\partial  \theta} + \frac{1}{\sin^2\theta} \frac{\partial^2}{\partial \varphi^2} \right]} \ex
+    \e{L_{x} = i \hbar \left[\sin(\varphi) \frac{\partial}{\partial \theta} + \cos(\varphi)\cot(\theta)\frac{\partial}{\partial \varphi}\right]}\ex
+    \e{ L_{y} = i \hbar\left[-\cos(\varphi)\frac{\partial}{\partial \theta} + \sin(\varphi)\cot(\theta)\frac{\partial}{\partial\varphi}\right]}\ex
+\e{L_{z} = - i \hbar \frac{\partial}{\partial \varphi}}\ex
     \item [$\blacktriangle$] \g{Operatori di abbassamento e innalzamento}
         \e{L_\pm = \hbar e^{\pm i\varphi} \left[i\cot\theta \frac{\partial}{\partial\varphi} \pm \frac{\partial}{\partial\theta}\right]} \ex
         \e{J_\pm = J_x \pm iJ_y, \quad J_- = (J_+)^\dagger} \ex
         \e{J_\pm |j, m\rangle = \hbar \sqrt{j(j+1) - m(m \pm 1)} |j, m \pm 1\rangle \label{azione J+ J-}} \ex
-        Nella base $\ket{j,m}$, con m che va in ordine da j a $-j$, $J_{z}$ risulta diagonalizzata, $J_{+}$ ha valori non nulli solo nella diagonale sopra quella principale, $J_{-}$ ha valori non nulli solo nella diagonale sotto quella principale. 
-         \e{J_z J_\pm |\lambda, m\rangle = \hbar(m \pm 1) J_\pm |\lambda, m\rangle} \ex
+        Nella base $\ket{j,m}$, con m che va in ordine da j a $-j$, $J_{z}$ risulta diagonalizzata, $J_{+}$ ha valori non nulli solo nella diagonale sopra quella principale, $J_{-}$ ha valori non nulli solo nella diagonale sotto quella principale. Per costruire $L_{\pm}$, $L_{x}$ e $L_{y}$ le formule sono analoghe a queste ma con l al posto di j.
+         \e{J_z J_\pm |j, m\rangle = \hbar(m \pm 1) J_\pm |j, m\rangle} \ex
          \e{J_{+}J_{-} = J^{2} - J_{z}\left(J_{z} - \hbar\right) \qquad J_{-}J_{+} = J^{2} - J_{z}\left(J_{z} + \hbar\right)}\ex
-
+Valgono formule analoghe per $L_{+}$, $L_{-}$ e $S_{+}$, $S_{-}$
     \it \g{Espressione di $J_x$ e $J_y$}
         \e{J_x = \frac{J_+ + J_-}{2} \qquad J_y = \frac{J_+ - J_-}{2i} \label{Jx e Jy}} \ex
 
         
 
     \item [$\blacktriangle$] \g{Relazioni di commutazione}
+    \begin{equation}
+\varepsilon_{ijk} =
+\begin{cases}
++1 & \text{se } (i,j,k) \text{ è una permutazione pari di } (1,2,3) \\
+-1 & \text{se } (i,j,k) \text{ è una permutazione dispari di } (1,2,3) \\
+\ \ 0 & \text{se due indici sono uguali}
+\end{cases}
+\end{equation}
         \e{[J_{i},L_{j}] = [L_i, L_j] = i\hbar \epsilon_{ijk} L_k \quad [L^2, L_j] = 0 \quad[J_i, J_j] = i\hbar \epsilon_{ijk} J_k } \ex \e{[L_i, X_j] = [J_i, X_j] = i\hbar \epsilon_{ijk} X_k \quad [L_i, P_j] = [J_i, P_j] = i\hbar \epsilon_{ijk} P_k} \ex
          \e{[J_z, J_\pm] = \pm \hbar J_\pm \qquad [J_+, J_-] = 2\hbar J_z} \ex
        
@@ -631,11 +658,12 @@ Per un quanto di energia si ha
 La forma generica è data da 
 \e{\psi_{l}^{m} = f_{l}^{m}(r)Y_{l}^{m}(r,\theta,\varphi) \label{autofunzioni simultanee L2 e Lz}}\ex
 dove 
-    \e{Y^m_l(\theta, \varphi) = \sqrt{\frac{(2l + 1)}{4\pi} \frac{(l - |m|)!}{(l + |m|)!}} P^m_l(\cos\theta) e^{im\varphi}} \ex
-    vengono dette armoniche sferiche. In termini di polinomi di Legendre, si ha:
+    \e{Y^m_l(\theta, \varphi) = \frac{(-1)^{l}}{2^{l}l!}\sqrt{\frac{(2l + 1)}{4\pi} \frac{(l + m)!}{(l - m)!}}e^{im\varphi} P^m_l(\cos(\theta), \sin(\theta)) } \ex
+    vengono dette armoniche sferiche. $P^m_l(\cos(\theta), \sin(\theta))$ è un polinomio in $\cos(\theta)$ e $\sin(\theta)$. In termini di polinomi di Legendre, si ha:
     \e{P^m_l(x) = (-1)^m \frac{(1 - x^2)^{m/2}}{2^l l!} \frac{d^{l+m}}{dx^{l+m}} (x^2 - 1)^l} \ex
     Le armoniche sferiche sono ortonormali:
     \e{\int_{0}^{2\pi}\text{d}\varphi\int_{0}^{\pi}\text{d}\theta \sin(\theta)\overline{Y_{l}^{m}(\theta,\varphi)}Y_{l'}^{m'}(\theta,\varphi) = \delta_{ll'}\delta_{mm'}}\ex
+    dove $\int_{0}^{2\pi}\text{d}\varphi\int_{0}^{\pi}\text{d}\theta \sin(\theta) = \int\text{d}\Omega$\\
     Inoltre valgono le seguenti proprietà:
     \e{Y_{l}^{m}(\pi - \theta,\varphi + \pi) = (-1)^{l}Y_{l}^{m}(\theta,\varphi)}\ex
     \e{\overline{Y_{l}^{m}(\theta,\varphi)} = (-1)^{m}Y_{l}^{-m}(\theta,\varphi)}\ex
@@ -681,16 +709,18 @@ Tra due vettori fattorizzati si ha
 è base o.n. di $\mathcal{H} = \mathcal{H}_{1} \otimes \mathcal{H}_{2}$. Dati due autovalori $a_{1}$ e $b_{2}$ fissati, la degenerazione della coppia su $\mathcal{H}$ sarà
 \e{d(a_{1},b_{2}) = d(a_{1})d(b_{2})}\ex
 \item [$\blacksquare$] \g{Spin}
+\it \g{Hamiltoniana di interazione con $\vec{B}$}
+\e{H = -\vec{\mu}\cdot \vec{B} \qquad \vec{\mu} = \mu_{0}\vec{S}}\ex
     \it \g{Relazioni di commutazione}
         \e{[S_i, S_j] = i\hbar \epsilon_{ijk} S_k \qquad [S_{i},X_{j}] = [S_{i}, P_{j}] = [S_{i}, L_{j}] = 0} \ex
+        \e{[L^{2}, S^{2}] = 0 \qquad [J^{2}, S^{2}] = 0 \qquad [J^{2}, L^{2}] = 0 \qquad [S^{2}, S_{z}] = 0}\ex
     \it \g{Spettro di $(S^2, S_z)$}
         \e{\sigma(S^2; S_z) = \{\hbar^2 s(s+1), \hbar m\}} \ex
         con $s \in \frac{1}{2} \mathbb{N}$ e $m \in \{-s, -s + 1, \dots, +s\}$.
 \item [$\blacktriangle$] \g{Prodotto $L \cdot S$}
     \e{L \cdot S = \frac{1}{2} \left(J^2 - L^2 - S^2\right)} \ex
+    \e{L \cdot S = L_{z}S_{z} + \frac{1}{2}(L_{+}S_{-} + L_{-}S_{+})}\ex
 \item [$\blacktriangle$] \g{Spin $1/2$}
-    \it \g{Spettro}
-        \e{\sigma(S_z) = \left\{-\frac{\hbar}{2}, +\frac{\hbar}{2}\right\}} \ex
          \it\g{Operatori di abbassamento e innalzamento}
          Per $S{\pm}$ vale l'analogo della (\ref{azione J+ J-}) con s al posto di j, per $S_{x}$ e $S_{y}$ vale l'analogo della (\ref{Jx e Jy}) cutilizzando $S_{\pm}$
   \it\g{Matrici di Pauli}
@@ -708,6 +738,7 @@ Tra due vettori fattorizzati si ha
         1 & 0 \\
         0 & -1
     \end{pmatrix}} \ex
+    \e{\sigma_{z}\ket{+} = \ket{+} \qquad \sigma_{z}\ket{-} = - \ket{-}}\ex
     \e{[\sigma_i, \sigma_j] = 2i \epsilon_{ijk} \sigma_k \qquad \{\sigma_i, \sigma_j\} = 2\delta_{ij}} \ex
     \e{\sigma_i \sigma_j = \frac{1}{2} \left([\sigma_i, \sigma_j] + \{\sigma_i, \sigma_j\}\right)} \ex
 \it \g{Composizione di spin di due particelle}
@@ -720,18 +751,20 @@ Tra due vettori fattorizzati si ha
         \cos\theta & \sin\theta e^{-i\varphi} \\
         \sin\theta e^{i\varphi} & -\cos\theta
     \end{pmatrix}} \ex
+       \e{\sigma(S_n) = \left\{-\frac{\hbar}{2}, +\frac{\hbar}{2}\right\}} \ex
+
     Gli autostati sono:
-    \e{|+\rangle_{\hat{n}} = \cos\frac{\theta}{2} e^{-i\frac{\varphi}{2}} |+\rangle + \sin\frac{\theta}{2} e^{i\frac{\varphi}{2}} |-\rangle} \ex
-    \e{|-\rangle_{\hat{n}} = -\sin\frac{\theta}{2} e^{-i\frac{\varphi}{2}} |+\rangle + \cos\frac{\theta}{2} e^{i\frac{\varphi}{2}} |-\rangle} \ex
+    \e{|+\rangle_{\hat{n}} = \cos\frac{\theta}{2}  |+\rangle + \sin\frac{\theta}{2} e^{i{\varphi}} |-\rangle} \ex
+    \e{|-\rangle_{\hat{n}} = \sin\frac{\theta}{2} |+\rangle - \cos\frac{\theta}{2} e^{i{\varphi}} |-\rangle} \ex
 in forma matriciale gli autostati lungo una generica direzione $\hat{n}$ sono:
     \e{\left|\frac{\hbar}{2}\right\rangle_{\hat{n}} =
     \begin{pmatrix}
-        \cos\frac{\theta}{2} e^{-i\frac{\varphi}{2}} \\
-        \sin\frac{\theta}{2} e^{i\frac{\varphi}{2}}
+        \cos\frac{\theta}{2}  \\
+        \sin\frac{\theta}{2} e^{i{\varphi}}
     \end{pmatrix} \qquad \left|-\frac{\hbar}{2}\right\rangle_{\hat{n}} =
     \begin{pmatrix}
-        -\sin\frac{\theta}{2} e^{-i\frac{\varphi}{2}} \\
-        \cos\frac{\theta}{2} e^{i\frac{\varphi}{2}}
+        \sin\frac{\theta}{2}  \\
+        -\cos\frac{\theta}{2} e^{i{\varphi}}
     \end{pmatrix}} \ex
 \it \g{Spin in direzione $x$}
     \e{|+\rangle_x = \frac{1}{\sqrt{2}}(|+\rangle + |-\rangle) \qquad |-\rangle_x = \frac{1}{\sqrt{2}}(|+\rangle - |-\rangle)} \ex
@@ -739,6 +772,29 @@ in forma matriciale gli autostati lungo una generica direzione $\hat{n}$ sono:
 \it \g{Spin in direzione $y$}
     \e{|+\rangle_y = \frac{1}{\sqrt{2}}(\ket{+} + i\ket{-}) \quad |-\rangle_y = \frac{1}{\sqrt{2}}(|+\rangle -i|-\rangle)} \ex
     \e{|+\rangle = \frac{1}{\sqrt{2}}(|+\rangle_y + |-\rangle_y) \quad |-\rangle = -\frac{i}{\sqrt{2}}(|+\rangle_y - |-\rangle_y)} \ex
+    \it \g{Spinore di Pauli}
+    Considerando gli spazi di posizione e di spin assieme, ovvero $\mathcal{H} = \mathcal{H}_{\vec{x}} \ \otimes \ \mathcal{H}_{\vec{s}} $ lo stato della particella di spin 1/2 è descritto dallo spinore di Pauli:
+    \e{\ket{\psi} = \begin{pmatrix}
+        \psi_{+}(\vec{x})\\
+        \psi_{-}(\vec{x} 
+    \end{pmatrix} = [\psi](\vec{x}) = \psi_{+}(\vec{x})\begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix} + \psi_{-}(\vec{x}) \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}}\ex
+    \e{\psi_{+}(\vec{x}) = \braket{\vec{x}, +}{\psi} \quad \psi_{-}(\vec{x}) = \braket{\vec{x},-}{\psi}}\ex
+    \e{\norm{\psi}^{2} = \int \text{d}x^{3}\left(\left|\psi_{+}(\vec{x})\right|^{2} + \left|\psi_{-}(\vec{x})\right|^{2}\right)}\ex
+    \e{(\vec{X}\left[\psi\right])(\vec{x}) = \begin{pmatrix}
+        \vec{x}\psi_{+}(\vec{x})\\
+        \vec{x}\psi_{-}(\vec{x})
+    \end{pmatrix} \quad (\vec{P}[\psi])(\vec{x}) = -i \hbar \begin{pmatrix}
+        \vec{\nabla}\psi_{+}(\vec{x})\\
+        \vec{\nabla}\psi_{-}(\vec{x})
+    \end{pmatrix} }\ex
+    \e{(\vec{S}[\psi])(\vec{x}) = \frac{\hbar}{2}\vec{\sigma}\begin{pmatrix}
+        \psi_{+}(\vec{x})\\
+        \psi_{-}(\vec{x})
+    \end{pmatrix}}\ex
 \item [$\blacksquare$] \g{Composizione dei momenti angolari}
     \it \g{Generalità}
         \e{J = J^{(1)} \otimes I + I \otimes J^{(2)}} \ex
@@ -750,7 +806,7 @@ in forma matriciale gli autostati lungo una generica direzione $\hat{n}$ sono:
         \e{J_{z}\ket{j,m} = \hbar m\ket{j,m} \qquad J_{z}\ket{m1,m2} = (m1 + m2)\hbar \ket{m1,m2}}\ex
     \it \g{Relazioni di commutazione}
         \e{[J^2, J^{(1)}] = 0 \qquad [J^2, J^{(2)}] = 0 \qquad [J^2, J^{(1,2)}_i] \neq 0} \ex
-        \it \g{Coefficienti di Clebsch-Gordan} Ogni coefficiente, ad esempio $-3/2$, va letto come se ci fosse una radice. In questo caso quindi $-\sqrt{3/2}$
+        \it \g{Coefficienti di Clebsch-Gordan} Ogni coefficiente, ad esempio $-3/2$, va letto come se ci fosse una radice. In questo caso quindi $-\sqrt{3/2}$. I numeri in alto, ad esempio $1 \cross 1$, indicano nell'ordine i valori di $j_{1}$ e $j_{2}$
          \begin{minipage}[t]{1.1\linewidth}
         \centering
         \begin{minipage}[t]{0.3\linewidth} % Prima immagine
@@ -794,6 +850,7 @@ che viene detto stato di singoletto ed è asimmetrico.
 Per quanto detto sopra allora le parti di posizione per tali particelle dovranno essere antisimmetriche nel caso degli stati di tripletto e simmetriche nel caso del singoletto. 
 
 \item [$\blacksquare$] \g{Atomo di Idrogeno}
+$\{ H, L^{2},L_{z}\}$ è un ICOC
 \item [$\blacktriangle$] \g{Hamiltoniana separata in due parti}
 \e{H = H_{CM} + H_{r} \quad M = m_{a} + m_{b}}\ex
 \e{\vec{X}_{CM} = \frac{m_{a}}{M}\vec{X_{a}} + \frac{m_{b}}{M}\vec{X_{b}} \quad \vec{P}_{CM} = \vec{P_{a}} + \vec{P_{b}}}\ex
@@ -801,7 +858,7 @@ Per quanto detto sopra allora le parti di posizione per tali particelle dovranno
 \e{H_{r} = \frac{\vec{P}^{2}_{r}}{2 \mu} - \frac{e^{2}}{r} \qquad \mu = \frac{m_{e}m_{p}}{M}}\ex
 \item [$\blacktriangle$] \g{Autofunzioni e autovalori per stati legati}
 Le autofunzioni sono del tipo della (\ref{autofunzioni simultanee L2 e Lz}). Gli autovalori $E_{n}$, con n=1 stato fondamentale, hanno degenerazione $n^{2}$. In particolare per ogni livello n si hanno autofunzioni per tutti i valori di l e m che rispettano tali condizioni:
-\e{0 \leq l  < n \qquad -l \leq m \leq l}\ex
+\e{0 \leq l  \leq n-1 \qquad -l \leq m \leq l}\ex
 Gli autovalori hanno energia pari a 
 \e{E_{n} = - \frac{E_{I}}{n^{2}}}\ex
 \item [$\blacksquare$] \g{Teoria delle perturbazioni}
@@ -816,13 +873,20 @@ Gli autovalori hanno energia pari a
         \e{E_n^1 = \langle E_n^0 | V | E_n^0 \rangle \qquad E_n^{2} = \sum_{m \neq n} \frac{|\langle E_n^0 | V | E_m^0 \rangle|^2}{E_n^0 - E_m^0}} \ex
         \e{\ket{E_{n}^{1}} =  \sum_{m \neq n} \ket{E_{m}^{0}}\frac{\langle E_m^0 | V | E_n^0 \rangle}{E_n^0 - E_m^0}}\ex
     \item [$\blacktriangle$] \g{Risoluzione nei casi con degenerazione}
-    Si costruisce la matrice $W$ con dimensione pari al valore della degenerazione. Per trovarne gli elementi si usa 
-    \e{\braket{\psi_{r}|V}{\psi_{s}}}\ex dove $\ket{\psi_{r}}$ e $\ket{\psi_{s}}$ sono autovettori degeneri relativi allo stesso autovalore oppure no. Diagonalizzando V si trovano le correzioni $E_{n,1}^{k}$ relative agli sviluppi
+    Si costruisce la matrice $V$ con dimensione pari al valore della degenerazione. Per trovarne gli elementi si usa 
+    \e{\braket{\psi_{r}|V}{\psi_{s}}}\ex dove $\ket{\psi_{r}}$ e $\ket{\psi_{s}}$ sono autovettori degeneri relativi allo stesso autovalore. Diagonalizzando V si trovano le correzioni $E_{n,1}^{k}$ relative agli sviluppi
     \e{E^{k} = E_{n, 0}^{k} + \lambda E_{n,1}^{k} + \dots}\ex
     Gli autovettori della matrice V sono invece gli autovettori all'ordine 0 espressi nella base degli autovettori degeneri.
+    \item [$\blacksquare$] \g{Dimensioni fisiche}
+    \e{[\ \hbar\ ] = [\ E\ ][\ T\ ] \qquad [\ \omega \  ] = [\ T \ ]^{-1} }\ex
+    \e{ \text{In 3D} \ [\ |\psi| \ ] = [\ L\ ]^{-3/2}, \quad \text{In 1D} \ [\ |\psi| \ ] = [\ L\ ]^{-1/2} }\ex
+    \e{ \text{In 2D} \ [\ |\psi| \ ] = [\ L\ ]^{-1}}\ex
+    \e{\left[ \ \vec{E} \ \right] = \frac{[\ E \ ]}{[ \ L \ ][ \ Q \ ]} \qquad \left[ \ \vec{B} \ \right] = \frac{[\ E \ ][\ T \ ]}{[\ Q \ ][\ L \ ]^{2}}}\ex
+    
 \item [$\blacksquare$] \g{Matematica utile}
     \item [$\blacktriangle$] \g{Identità trigonometriche}
         \e{\cos\alpha = \frac{e^{i\alpha} + e^{-i\alpha}}{2}, \quad \sin\alpha = \frac{e^{i\alpha} - e^{-i\alpha}}{2i}} \ex
+        \e{\cosh(\alpha) = \frac{e^{\alpha} + e^{-\alpha}}{2}\qquad \sinh(\alpha) = \frac{e^{\alpha} - e^{-\alpha}}{2} }\ex
 
     \it \g{Formule di duplicazione}
         \e{\sin(2\alpha) = 2\sin\alpha\cos\alpha \quad \tan(2\alpha) = \frac{2\tan\alpha}{1 - \tan^2\alpha}} \ex
@@ -862,29 +926,91 @@ Gli autovalori hanno energia pari a
 \e{\sqrt{x^{2}+y^{2}+z^{2}} = r}\ex
 \e{\int r^{2} \text{d}r\int \text{d}\varphi\int \sin(\theta)\text{d}\theta \quad \varphi \in (0,2\pi) \quad \theta \in (0,\pi)}\ex
     \it \g{Alcuni integrali notevoli}
+    \begin{equation}
+\int_{-\infty}^{+\infty} \delta(x) \, dx = 1 \qquad
+\int_{-\infty}^{+\infty} f(x) \delta(x - x_0) \, dx = f(x_0)
+\end{equation}
+
+\begin{equation}
+\int_{-\infty}^{+\infty} f(x) \delta(g(x)) \, dx = \sum_{i} \frac{f(x_i)}{|g'(x_i)|},
+\end{equation}
+
         \e{\int \sin^2x \, dx = \frac{1}{2}(x - \sin x \cos x)} \ex
-        \e{\int \cos^2x \, dx = \frac{1}{2}(x + \sin x \cos x) }\ex \e{ \int \sin x \cos x \, dx = -\frac{1}{2}\cos^2x} \ex
-        \e{\int \cos^3x \, dx = \frac{1}{12}(9\sin x + \sin 3x) = \sin x - \frac{\sin^3x}{3}} \ex
-        \e{\int \sin^3x \, dx = \frac{1}{12}(\cos 3x - 9\cos x) = -\cos x + \frac{\cos^3x}{3}} \ex
+        \e{\int \cos^2x \, dx = \frac{1}{2}(x + \sin x \cos x) }\ex \e{ \int \sin x \cos x \, dx = -\frac{1}{2}\cos^2x \quad \int \cos^3x \, dx = \sin x - \frac{\sin^3x}{3}} \ex
+        \e{\int \sin^3x \, dx = -\cos x + \frac{\cos^3x}{3}} \ex
         \e{\int \sin^2x \cos x \, dx = \frac{1}{3}\sin^3x \quad \int \sin x \cos^2x \, dx = -\frac{1}{3}\cos^3x} \ex
+        \begin{equation}
+\int \sin^4 x \, dx = \frac{3}{8}x - \frac{1}{4}\sin(2x) + \frac{1}{32}\sin(4x) 
+\end{equation}
+
+\begin{equation}
+\int \cos^4 x \, dx = \frac{3}{8}x + \frac{1}{4}\sin(2x) + \frac{1}{32}\sin(4x) 
+\end{equation}
+
+\begin{equation}
+\int \sin^5 x \, dx = -\cos x + \frac{2}{3}\cos^3 x - \frac{1}{5}\cos^5 x 
+\end{equation}
+
+\begin{equation}
+\int \cos^5 x \, dx = \sin x - \frac{2}{3}\sin^3 x + \frac{1}{5}\sin^5 x 
+\end{equation}
+
         \e{\int x e^{-x^2} \, dx = -\frac{1}{2} e^{-x^2} \qquad \int_0^\infty x^2 e^{-x^2} \, dx = \frac{1}{4} \sqrt{\pi}} \ex
        \e{ \int_{-\infty}^{+\infty} e^{-\alpha x^2} , dx = \sqrt{\frac{\pi}{\alpha}} \qquad \int_{-\infty}^{+\infty} x^2 e^{-\alpha x^2} dx = \sqrt{\frac{\pi}{2\alpha^3}} }\ex
 
-\e{\int_{-\infty}^{+\infty} e^{-\alpha x^2 + \beta x}  dx = \sqrt{\frac{\pi}{\alpha}}  e^{\frac{\beta^2}{4\alpha}}} \ex
+\e{\int_{-\infty}^{+\infty} e^{-\alpha x^2 + \beta x}  dx = \sqrt{\frac{\pi}{\alpha}}  e^{\frac{\beta^2}{4\alpha}} \ \int_{0}^{2\pi}e^{i\alpha \varphi}\text{d}\varphi = 0 \ \forall \alpha \in \mathbb{Z}\setminus \{0\}} \ex
+
 
         \item [$\blacktriangle$] \g{Numeri complessi}
         \e{z = a + ib = r(\cos(\theta) + i\sin(\theta)) = re^{i\theta} \quad \overline{z} = z^{*} = a - ib}\ex
+        \e{\alpha^{*}\beta + \alpha\beta^{*} = z + z^{*} = 2\text{Re}(z) = 2\text{Re}(\alpha^{*}\beta)}\ex
         dove 
         \e{r = |z| = \sqrt{a^{2}+b^{2}} }\ex
         \e{z^n = r^n \left[ \cos(n\theta) + i\sin(n\theta) \right]}\ex
         \item [$\blacktriangle$] \g{Vettori complessi} 
-        \e{\langle \mathbf{u} | \mathbf{v} \rangle = \sum_{j=1}^n u_j^* v_j}\ex
-        \e{\|\ket{\mathbf{u}}\| = \sqrt{\langle \mathbf{u} | \mathbf{u} \rangle} = \sqrt{\sum_{j=1}^n |u_j|^2}
+        \e{\langle \mathbf{u} | \mathbf{v} \rangle = \sum_{j=1}^n u_j^* v_j \quad \|\ket{\mathbf{u}}\| = \sqrt{\langle \mathbf{u} | \mathbf{u} \rangle} = \sqrt{\sum_{j=1}^n |u_j|^2}
 }\ex
-\item [$\blacktriangle$] \g{Serie e somme di Gauss}
-    \it \g{Somma di Gauss}
-        \e{\sum_{i=0}^N i = \frac{N(N + 1)}{2}} \ex
-    \it \g{Serie geometrica}
+\item [$\blacktriangle$] \g{Gradiente e laplaciano}
+\begin{equation}
+\nabla f(x,y,z) 
+= \frac{\partial f}{\partial x}\,\hat{\mathbf{x}} 
++ \frac{\partial f}{\partial y}\,\hat{\mathbf{y}} 
++ \frac{\partial f}{\partial z}\,\hat{\mathbf{z}}
+\end{equation}
+\begin{equation}
+\nabla f(r,\theta,\varphi)
+= \hat{\mathbf{r}}\,\frac{\partial f}{\partial r}
++ \hat{\boldsymbol{\theta}}\,\frac{1}{r}\,\frac{\partial f}{\partial \theta} 
++ \hat{\boldsymbol{\varphi}}\,\frac{1}{r\,\sin\theta}\,\frac{\partial f}{\partial \varphi}
+\end{equation}
+\begin{equation}
+\nabla^2 f(x,y,z)
+= \frac{\partial^2 f}{\partial x^2}
++ \frac{\partial^2 f}{\partial y^2}
++ \frac{\partial^2 f}{\partial z^2}
+\end{equation}
+\begin{align}
+    \nabla^2 f(r,\theta,\varphi)
+= \frac{1}{r^2}\,\frac{\partial}{\partial r}
+\Bigl(
+  r^2 \,\frac{\partial f}{\partial r}
+\Bigr)
+& + \frac{1}{r^2 \sin\theta}\,\frac{\partial}{\partial \theta}
+\Bigl(
+  \sin\theta \,\frac{\partial f}{\partial \theta}
+\Bigr)\ 
++\\
+    & + \frac{1}{r^2 \sin^2\theta}\,\frac{\partial^2 f}{\partial \varphi^2}
+\end{align}
+\item [$\blacktriangle$] \g{Matrici}
+\e{e^{A} = \sum_{0}^{\infty}\frac{A^{n}}{n!} = U e^{A_{d}}U^{\dagger}}\ex
+Dove $A_{d}$ è la matrice A diagonalizzata e $U$ è la matrice che ha come colonne gli autovettori normalizzati di A, nell'ordine in cui compaiono gli autovalori in $A_{d}$
+\begin{equation}
+\det(A) = \sum_{k=1}^{n}a_{ik}(-1)^{i+k}M_{i+k}
+\end{equation}
+\e{A^{2} = \mathbb{I} \ \implies \sigma(A) = \pm 1}\ex
+
+    \item [$\blacktriangle$] \g{Serie geometrica}
         \e{\sum_{i=0}^N q^i = \frac{1 - q^{N+1}}{1 - q}} \ex
         La serie converge per $|q| < 1$ e in tal caso:
         \e{\sum_{i=0}^\infty q^i = \frac{1}{1 - q}} \ex
@@ -926,3 +1052,4 @@ Gli autovalori hanno energia pari a
 \end{multicols}
 
 \end{document}
+
